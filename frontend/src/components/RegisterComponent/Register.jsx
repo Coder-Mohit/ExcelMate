@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { validateForm } from "../../validateForm";
 import "./Register.css";
-
+import { userUrl } from "../../Url/userUrl";
 const Register = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -27,24 +27,24 @@ const Register = () => {
   const handleOnChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
   const handleRegister = async (e) => {
     e.preventDefault();
 
     const { valid, validateErrors } = validateForm(formData);
     setErrors(validateErrors);
-    if (valid) {
-      console.log(formData);
 
-      axios
-        .post("http://localhost:3000/user/save", formData)
-        .then((res) => setMessage(res.data.message))
-        .catch((e) => {
-          const backendMessage =
-            e.response?.data?.message || "Something went wrong";
-          console.error("Error downloading file:", backendMessage);
-          alert(backendMessage); // or show in UI
-        });
+    if (!valid) return;
+
+    try {
+      const res = await axios.post(userUrl + "save", formData);
+      setMessage(res.data.message);
+    } catch (error) {
+      const backendMessage =
+        error.response?.data?.message || "Something went wrong";
+      console.error("Registration error:", backendMessage);
+      console.log(error.message);
+
+      alert(backendMessage);
     }
   };
 

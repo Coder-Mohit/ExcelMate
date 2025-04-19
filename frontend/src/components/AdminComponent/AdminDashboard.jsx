@@ -1,19 +1,17 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import "./AdminDashboard.css"; // Import the CSS
+import { adminUrl } from "../../Url/adminUrl";
 
 const AdminDashboard = () => {
   const handleExcel = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:3000/admin/download-users-excel",
-        {
-          responseType: "blob",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+      const response = await axios.get(adminUrl + "download-users-excel", {
+        responseType: "blob",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       const blob = new Blob([response.data], {
         type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
       });

@@ -38,14 +38,16 @@ export const save = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const userDetails = await userSchemaModel.findOne({ email });
+    const userDetails = await userSchemaModel.findOne({
+      email: email.toLowerCase(),
+    });
+
     if (!userDetails)
       return res.status(404).json({ message: "Email not registered" });
 
     const isMatch = bcrypt.compareSync(password, userDetails.password);
 
     if (!isMatch) return res.status(401).json({ message: "password mismatch" });
-    console.log(isMatch);
 
     const payload = {
       id: userDetails._id,

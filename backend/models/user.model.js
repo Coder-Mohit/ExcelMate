@@ -8,14 +8,15 @@ const userSchema = mongoose.Schema({
     required: [true, "name is required"],
   },
   email: {
+    lowercase: true,
     type: String,
-    uniqe: true,
+    unique: true,
     trim: true,
     required: [true, "email is required"],
   },
   mobile: {
     type: String,
-    uniqe: true,
+    unique: true,
     trim: true,
     required: [true, "no. is required"],
   },
@@ -25,6 +26,7 @@ const userSchema = mongoose.Schema({
     required: [true, "password is requried"],
   },
   city: {
+    lowercase: true,
     type: String,
     required: [true, "city is required"],
     trim: true,

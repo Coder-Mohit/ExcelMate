@@ -9,16 +9,13 @@ export const validateForm = (userDetails) => {
   };
   const { name, email, mobile, city, password } = userDetails;
 
-  Object.keys(userDetails).map((field) => {
-    if (userDetails[`${field}`] === "") {
-      valid = false;
-      validateErrors[`${field}`] = `please enter ${field}`;
-    }
-  });
-
-  if (/^[a-bA-Z ]+$/.test(name)) {
+  if (
+    !/^[A-Za-z]+(?: [A-Za-z]+)*$/.test(name) ||
+    name.length < 2 ||
+    name.length > 50
+  ) {
     validateErrors.name =
-      "please enter a valid name (no special symbols or digits allowed )";
+      "Please enter a valid name (only letters, single space between words , 2 to 50 characters)";
     valid = false;
   }
   if (!/^\S+@\S+\.\S+$/.test(email)) {
@@ -49,6 +46,13 @@ export const validateForm = (userDetails) => {
     validateErrors.password = "*Password must contain at least one number";
     valid = false;
   }
+
+  Object.keys(userDetails).map((field) => {
+    if (userDetails[`${field}`] === "") {
+      valid = false;
+      validateErrors[`${field}`] = `please enter ${field}`;
+    }
+  });
 
   return { valid, validateErrors };
 };

@@ -6,6 +6,7 @@ import AdminDashboard from "./components/AdminComponent/AdminDashboard";
 import Header from "./components/HeaderComponent/Header";
 import UserDashboard from "./components/UserComponent/UserDashboard";
 import ProtectedRoute from "./components/AuthComponent/ProtectedRoute";
+import NotFound from "./components/NotFoundComponent/NotFound";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             </ProtectedRoute>
           }
         ></Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );

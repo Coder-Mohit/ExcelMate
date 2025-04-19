@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./UserDashboard.css";
 
 const UserDashboard = () => {
-  const [userName, setUserName] = useState("");
+  const [userName, setUserName] = useState();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -11,9 +11,15 @@ const UserDashboard = () => {
     if (!token) {
       navigate("/login");
     } else {
-      const user = JSON.parse(localStorage.getItem("user"));
+      const user = localStorage.getItem("user");
+
       if (user) {
-        setUserName(user.name);
+        try {
+          const parsedUser = JSON.parse(user);
+          setUserName(parsedUser.name);
+        } catch (e) {
+          console.error("Error parsing user data:", e);
+        }
       }
     }
   }, [navigate]);
