@@ -46,7 +46,7 @@ const Login = () => {
 
       setMessage(message);
       localStorage.setItem("token", token);
-      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("isLoggedIn", true);
       localStorage.setItem("user", JSON.stringify(user));
 
       const role = user?.role;
@@ -57,7 +57,7 @@ const Login = () => {
       } else if (role === "user") {
         navigate("/user/dashboard");
       } else {
-        navigate("/unknown-role");
+        navigate("/login");
       }
     } catch (err) {
       const errorMessage = err.response?.data?.message || "An error occurred.";

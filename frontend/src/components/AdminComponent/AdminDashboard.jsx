@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "axios";
-import "./AdminDashboard.css"; // Import the CSS
+import "./AdminDashboard.css";
 import { adminUrl } from "../../Url/adminUrl";
 
 const AdminDashboard = () => {
