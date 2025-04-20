@@ -1,4 +1,3 @@
-import { key } from "../auth.key.js";
 import jwt from "jsonwebtoken";
 
 export const auth = (req, res, next) => {
@@ -11,7 +10,7 @@ export const auth = (req, res, next) => {
   const token = authHeader.split(" ")[1];
   if (!token) return res.status(401).json({ message: "Token missing" });
   try {
-    const user = jwt.verify(token, key);
+    const user = jwt.verify(token, process.env.SECRET_KEY);
     req.user = user;
     next();
   } catch (e) {

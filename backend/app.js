@@ -3,6 +3,9 @@ import userRouter from "./routes/user.router.js";
 import adminRouter from "./routes/admin.router.js";
 import cors from "cors";
 import { auth } from "./middlewares/auth.middleware.js";
+import dotenv from "dotenv";
+dotenv.config();
+
 const app = express();
 const port = 3000;
 

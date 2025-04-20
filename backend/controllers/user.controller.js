@@ -1,7 +1,6 @@
 import userSchemaModel from "../models/user.model.js";
 import "../connection.js";
 import jwt from "jsonwebtoken";
-import { key } from "../auth.key.js";
 import { dataSaveExcel } from "../helper_methods/excel_data_save.js";
 import bcrypt from "bcryptjs";
 
@@ -54,7 +53,7 @@ export const login = async (req, res) => {
       email: userDetails.email,
       role: userDetails.role,
     };
-    const token = jwt.sign(payload, key);
+    const token = jwt.sign(payload, process.env.SECRET_KEY);
 
     return res.status(200).json({
       message: "Login successful",

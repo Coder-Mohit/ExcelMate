@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 export const downloadUserExcel = (req, res) => {
-  const filePath = path.join("exports", "users.xlsx");
+  const filePath = path.join(__dirname, "exports", "users.xlsx");
 
   if (fs.existsSync(filePath)) {
     res.download(filePath, "users.xlsx", (err) => {

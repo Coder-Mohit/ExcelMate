@@ -111,7 +111,7 @@ const Register = () => {
         {errors.role && <div className="error">{errors.role}</div>}
 
         <button type="submit">Register</button>
-        <p>{message}</p>
+        <p style={{ color: "green" }}>{message}</p>
       </form>
     </div>
   );
